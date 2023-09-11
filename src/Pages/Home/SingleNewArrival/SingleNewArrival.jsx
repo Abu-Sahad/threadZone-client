@@ -38,7 +38,7 @@ const SingleNewArrival = ({ singleArrivalProduct }) => {
 
     const handleAddProduct = () => {
         console.log("product is submitted ");
-        axios.post('https://thread-zone-server.vercel.app/orderSubmit', productInfo)
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/orderSubmit', productInfo)
             .then(res => {
                 console.log("product is added", res.data);
                 Swal.fire({

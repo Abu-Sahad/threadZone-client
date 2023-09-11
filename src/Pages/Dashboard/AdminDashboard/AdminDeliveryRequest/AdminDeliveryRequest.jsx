@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 const AdminDeliveryRequest = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/adminDeliveryList')
+    axios.get('https://thread-zone-server-abu-sahad.vercel.app/adminDeliveryList')
       .then(res => {
         setProducts(res.data);
       })
@@ -15,7 +15,7 @@ const AdminDeliveryRequest = () => {
   }, []);
 
   const productDelivery = (id) => {
-    axios.post('https://thread-zone-server.vercel.app/singleProductDelivery', { id })
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/singleProductDelivery', { id })
       .then(res => {
         if (res.status) {
           const newArray = products.filter(item => item._id !== id);

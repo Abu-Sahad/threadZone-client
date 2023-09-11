@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 const AdminDeliveryComplete = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/adminDeliveryComplete')
+    axios.get('https://thread-zone-server-abu-sahad.vercel.app/adminDeliveryComplete')
       .then(res => {
         setProducts(res.data);
       })

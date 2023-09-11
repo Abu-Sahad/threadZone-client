@@ -9,7 +9,7 @@ const OrderRequest = () => {
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/sellerOrderRequest', { shopId: userInfo.shopId })
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/sellerOrderRequest', { shopId: userInfo.shopId })
       .then(res => {
         setProducts(res.data);
       })
@@ -18,7 +18,7 @@ const OrderRequest = () => {
   }, []);
 
   const SentToWarehouse = (id) => {
-    axios.post('https://thread-zone-server.vercel.app/sentToWareHouse', { id })
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/sentToWareHouse', { id })
       .then(res => {
         if (res.status) {
           setProducts(preArray =>

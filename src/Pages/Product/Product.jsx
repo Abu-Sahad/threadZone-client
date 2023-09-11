@@ -18,7 +18,7 @@ const Product = () => {
   const [productInfo, setProductInfo] = useState({});
 
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/productInformation')
+    axios.get('https://thread-zone-server-abu-sahad.vercel.app/productInformation')
       .then(res => {
         setProductInfo(res.data);
         // console.log("product information ",res.data.colorList);

@@ -25,7 +25,7 @@ const ProductRequestSingle = ({ product }) => {
 
         }
 
-        axios.post('https://thread-zone-server.vercel.app/adminProductApprove', newProduct)
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/adminProductApprove', newProduct)
             .then(res => {
                 console.log('product status ', res.data);
             })

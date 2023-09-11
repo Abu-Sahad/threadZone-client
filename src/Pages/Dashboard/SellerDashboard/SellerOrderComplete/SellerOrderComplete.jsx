@@ -7,7 +7,7 @@ const SellerOrderComplete = () => {
   const [products, setProducts] = useState([]);
   const { userInfo } = useContext(AuthContext);
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/sellerOrderComplete', { shopId: userInfo.shopId })
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/sellerOrderComplete', { shopId: userInfo.shopId })
       .then(res => {
         setProducts(res.data);
       })

@@ -1,16 +1,16 @@
-import {createContext, useReducer, useEffect} from 'react'; 
+import { createContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
 
 const CategoryContext = createContext();
 
 const initialState = {
-  sortBy: null, 
+  sortBy: null,
   rating: null,
-  minPrice:null,
-  maxPrice : null, 
-  size:null,
-  color:null,
-  category:null
+  minPrice: null,
+  maxPrice: null,
+  size: null,
+  color: null,
+  category: null
 };
 
 
@@ -22,14 +22,14 @@ const Reducer = (state, action) => {
       return { ...state, sortBy: action.payload };
     case 'FILTER_BY_RATING':
       return { ...state, rating: action.payload };
-    case 'FILTER_BY_PRICE' : 
-    return {...state,minPrice:action.payload.min,maxPrice:action.payload.max};
+    case 'FILTER_BY_PRICE':
+      return { ...state, minPrice: action.payload.min, maxPrice: action.payload.max };
     case 'SIZE_BY':
-        return {...state,size : action.payload}  ;
-    case 'FILTER_BY_COLOR' :
-       return {...state, color:action.payload}  ;
-    case 'FILTER_BY_CATEGORY' :
-        return {...state,category : action.payload}     
+      return { ...state, size: action.payload };
+    case 'FILTER_BY_COLOR':
+      return { ...state, color: action.payload };
+    case 'FILTER_BY_CATEGORY':
+      return { ...state, category: action.payload }
     default:
       return state;
   }
@@ -39,14 +39,14 @@ const CategoryProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(Reducer, initialState);
 
-    useEffect(() => {
-   axios.get('http://localhost:5000/getAllProduct')
-  .then((res) => {
-  dispatch({ type: 'SET_PRODUCTS', payload: res.data});
-  })
-  .catch((err) => {
-    console.log('Error:', err);
-  });
+  useEffect(() => {
+    axios.get('https://thread-zone-server-abu-sahad.vercel.app/getAllProduct')
+      .then((res) => {
+        dispatch({ type: 'SET_PRODUCTS', payload: res.data });
+      })
+      .catch((err) => {
+        console.log('Error:', err);
+      });
   }, []);
 
   return (
@@ -56,4 +56,4 @@ const CategoryProvider = ({ children }) => {
   );
 };
 
-export { CategoryProvider, CategoryContext};
+export { CategoryProvider, CategoryContext };

@@ -43,7 +43,7 @@ const AddProduct = () => {
 
 
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/getAllCategory')
+    axios.get('https://thread-zone-server-abu-sahad.vercel.app/getAllCategory')
       .then(res => {
         setCategoryList(res.data);
       })
@@ -100,7 +100,7 @@ const AddProduct = () => {
     // setProductInfo(value=>({...value,image:allImage}));
     const newArray = { ...productInfo, image: allImage, description: description };
     console.log("New Array ", newArray);
-    axios.post('https://thread-zone-server.vercel.app/addProduct', newArray)
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/addProduct', newArray)
       .then(res => {
         console.log('Add Product ', res.data);
         Swal.fire({

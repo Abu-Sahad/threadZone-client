@@ -7,7 +7,7 @@ const TemplateReviews = (params) => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
-        axios.post('https://thread-zone-server.vercel.app/getReviewList', { role: 'product', productId: params.productId })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/getReviewList', { role: 'product', productId: params.productId })
             .then(res => {
                 setReviews(res.data)
             })

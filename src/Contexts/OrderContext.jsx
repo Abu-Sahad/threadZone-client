@@ -9,7 +9,7 @@ const OrderProvider = ({ children }) => {
     const { userInfo } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.post('https://thread-zone-server.vercel.app/getAllProduct', { userId: userInfo._id })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/getAllProduct', { userId: userInfo._id })
             .then((res) => {
                 // console.log("order data => ",res.data);
                 setAllOrder(res.data);

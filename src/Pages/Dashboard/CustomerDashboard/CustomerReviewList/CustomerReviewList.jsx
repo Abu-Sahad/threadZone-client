@@ -14,7 +14,7 @@ const CustomerReviewList = () => {
       role: 'customer',
       userId: userInfo._id
     }
-    axios.post("https://thread-zone-server.vercel.app/getReviewList", info)
+    axios.post("https://thread-zone-server-abu-sahad.vercel.app/getReviewList", info)
       .then(res => {
         setReturnList(res.data);
       })

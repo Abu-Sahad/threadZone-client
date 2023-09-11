@@ -13,7 +13,7 @@ const AdminReviewList = () => {
       role: 'admin',
       userId: userInfo._id,
     }
-    axios.post("https://thread-zone-server.vercel.app/getReviewList", info)
+    axios.post("https://thread-zone-server-abu-sahad.vercel.app/getReviewList", info)
       .then(res => {
         setReturnList(res.data);
         console.log("all reviewed data ", res.data);

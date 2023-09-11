@@ -17,7 +17,7 @@ const initialState = {
 const productReducer = (state, action) => {
   switch (action.type) {
     case 'SET_DEFAULT':
-      return {...state,state:initialState};
+      return { ...state, state: initialState };
     case 'SORT_BY':
       return { ...state, sortBy: action.payload };
     case 'FILTER_BY_RATING':
@@ -59,7 +59,7 @@ const ProductProvider = ({ children }) => {
 
   useEffect(() => {
 
-    axios.post('https://thread-zone-server.vercel.app/getProducts', state)
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/getProducts', state)
       .then((res) => {
         // dispatch({ type: 'SET_TOTAL_PRODUCT', payload: res.data.totalProduct});
         setTotalProduct(res.data.totalProduct);
