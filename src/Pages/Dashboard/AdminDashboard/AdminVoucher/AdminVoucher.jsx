@@ -6,7 +6,7 @@ import axios from 'axios';
 function AdminVoucher() {
   const [allVoucher, setAllVoucher] = useState([]);
   useEffect(() => {
-    axios.get("https://thread-zone-server.vercel.app/getAllVoucher")
+    axios.get("https://thread-zone-server-abu-sahad.vercel.app/getAllVoucher")
       .then((res) => {
         setAllVoucher(res.data);
       })

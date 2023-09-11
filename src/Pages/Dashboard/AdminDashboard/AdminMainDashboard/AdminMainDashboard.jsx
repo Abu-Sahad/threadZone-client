@@ -8,12 +8,12 @@ const AdminMainDashboard = () => {
     const [dayVsPrice, setDayVsPrice] = useState([]);
     const [sellsVsPrice, setSellsVsPrice] = useState([]);
     useEffect(() => {
-        axios.post('https://thread-zone-server.vercel.app/dayVsOrder', { role: 'admin' })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/dayVsOrder', { role: 'admin' })
             .then(res => {
                 setDayVsPrice(res.data);
             })
             .then(err => console.log(err));
-        axios.post('https://thread-zone-server.vercel.app/sellsVsPrice', { role: 'admin' })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/sellsVsPrice', { role: 'admin' })
             .then(res => {
                 setSellsVsPrice(res.data);
             })

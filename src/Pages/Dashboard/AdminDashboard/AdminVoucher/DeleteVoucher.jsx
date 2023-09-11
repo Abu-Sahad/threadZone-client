@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 const DeleteVoucher = () => {
     const [allVoucher, setAllVoucher] = useState([]);
     useEffect(() => {
-        axios.get("https://thread-zone-server.vercel.app/getAllVoucher")
+        axios.get("https://thread-zone-server-abu-sahad.vercel.app/getAllVoucher")
             .then((res) => {
                 setAllVoucher(res.data);
             })
@@ -24,7 +24,7 @@ const DeleteVoucher = () => {
         })
 
         if (value === voucherName) {
-            axios.post("https://thread-zone-server.vercel.app/deleteVoucher", { id })
+            axios.post("https://thread-zone-server-abu-sahad.vercel.app/deleteVoucher", { id })
                 .then(res => {
                     if (res.data.status) {
                         const afterDelete = allVoucher.filter(cat => cat._id !== id);

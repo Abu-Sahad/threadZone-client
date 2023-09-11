@@ -11,7 +11,7 @@ const ShoppingCart = () => {
     const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
-        axios.post('https://thread-zone-server.vercel.app/getCartList', { id: userInfo._id })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/getCartList', { id: userInfo._id })
             .then(res => {
                 setCartItems(res.data);
             })
@@ -28,7 +28,7 @@ const ShoppingCart = () => {
 
     const handleDelete = (itemId) => {
         console.log(itemId);
-        axios.post('https://thread-zone-server.vercel.app/deleteCartItem', { id: itemId })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/deleteCartItem', { id: itemId })
             .then(res => {
                 console.log("item id ", res.data);
                 const newData = cartItems.filter(product => product._id !== itemId);

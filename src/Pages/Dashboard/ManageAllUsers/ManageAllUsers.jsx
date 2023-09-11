@@ -4,11 +4,11 @@ import Swal from "sweetalert2";
 
 const ManageAllUsers = () => {
     const { data: users = [], refetch } = useQuery(['users'], async () => {
-        const res = await fetch('https://thread-zone-server.vercel.app/users')
+        const res = await fetch('https://thread-zone-server-abu-sahad.vercel.app/users')
         return res.json()
     })
     const handleMakeAdmin = user => {
-        fetch(`https://thread-zone-server.vercel.app/users/admin/${user._id}`, {
+        fetch(`https://thread-zone-server-abu-sahad.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -26,7 +26,7 @@ const ManageAllUsers = () => {
             })
     }
     const handleSeller = user => {
-        fetch(`https://thread-zone-server.vercel.app/users/seller/${user._id}`, {
+        fetch(`https://thread-zone-server-abu-sahad.vercel.app/users/seller/${user._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

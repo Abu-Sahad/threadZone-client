@@ -16,7 +16,7 @@ const Payment = () => {
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/getAddress', { id: userInfo._id })
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/getAddress', { id: userInfo._id })
       .then(res => {
         setAddressList(res.data);
       })
@@ -37,7 +37,7 @@ const Payment = () => {
   }
 
   const handleOrder = () => {
-    axios.post('https://thread-zone-server.vercel.app/submitOrder', orderList)
+    axios.post('https://thread-zone-server-abu-sahad.vercel.app/submitOrder', orderList)
       .then(res => {
         if (res.data.success === true) {
           Swal.fire({

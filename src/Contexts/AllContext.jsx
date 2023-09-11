@@ -18,7 +18,7 @@ const initialState = {
 const Reducer = (state, action) => {
   switch (action.type) {
     case 'SET_DEFAULT':
-      return {...state,state:initialState};
+      return { ...state, state: initialState };
     case 'SET_DATA':
       return { ...state, data: action.payload };
     case 'SORT_BY':
@@ -30,12 +30,12 @@ const Reducer = (state, action) => {
     case 'SIZE_BY':
 
 
-        return {...state,size : action.payload}  ;
-    case 'FILTER_BY_COLOR' :
-       return {...state, color:action.payload}  ;
-    case 'FILTER_BY_CATEGORY' :
-      console.log("cat - ",action.payload)
-        return {...state,category : action.payload}     
+      return { ...state, size: action.payload };
+    case 'FILTER_BY_COLOR':
+      return { ...state, color: action.payload };
+    case 'FILTER_BY_CATEGORY':
+      console.log("cat - ", action.payload)
+      return { ...state, category: action.payload }
 
     default:
       return state;
@@ -48,7 +48,7 @@ const AllProvider = ({ children }) => {
 
 
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/getAllProduct')
+    axios.get('https://thread-zone-server-abu-sahad.vercel.app/getAllProduct')
       .then((res) => {
         dispatch({ type: 'SET_PRODUCTS', payload: res.data });
       })

@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        axios.post('https://thread-zone-server.vercel.app/findUserImformation', { email: user?.email })
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/findUserImformation', { email: user?.email })
             .then((res) => {
                 //   console.log("user Id =>  ",res.data);
                 setUserInfo(res.data);

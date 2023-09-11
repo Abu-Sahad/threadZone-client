@@ -15,17 +15,17 @@ const SellerMainDashboard = () => {
     const [visible, setVisible] = useState(false);
 
     const dataCollecting = async () => {
-        await axios.post('https://thread-zone-server.vercel.app/dayVsOrder', { role: 'seller', shopId: userInfo.shopId })
+        await axios.post('https://thread-zone-server-abu-sahad.vercel.app/dayVsOrder', { role: 'seller', shopId: userInfo.shopId })
             .then(res => {
                 setDayVsPrice(res.data);
             })
             .then(err => console.log(err));
-        await axios.post('https://thread-zone-server.vercel.app/sellsVsPrice', { role: 'seller', shopId: userInfo.shopId })
+        await axios.post('https://thread-zone-server-abu-sahad.vercel.app/sellsVsPrice', { role: 'seller', shopId: userInfo.shopId })
             .then(res => {
                 setSellsVsPrice(res.data);
             })
             .then(err => { console.log(err) });
-        await axios.post('https://thread-zone-server.vercel.app/visitVsSold', { role: 'seller', shopId: userInfo.shopId })
+        await axios.post('https://thread-zone-server-abu-sahad.vercel.app/visitVsSold', { role: 'seller', shopId: userInfo.shopId })
             .then(res => {
                 setVisitVsSold(res.data);
                 console.log("visit vs sold ", res.data);

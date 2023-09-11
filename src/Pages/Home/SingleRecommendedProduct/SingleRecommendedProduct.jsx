@@ -38,7 +38,7 @@ const SingleRecommendedProduct = ({ singleProduct }) => {
 
     const handleAddProduct = () => {
         console.log("product is submitted ");
-        axios.post('https://thread-zone-server.vercel.app/orderSubmit', productInfo)
+        axios.post('https://thread-zone-server-abu-sahad.vercel.app/orderSubmit', productInfo)
             .then(res => {
                 console.log("product is added", res.data);
                 Swal.fire({
@@ -53,7 +53,8 @@ const SingleRecommendedProduct = ({ singleProduct }) => {
     }
 
     return (
-        <div className="group rounded bg-white shadow-xl overflow-hidden relative h-96">
+
+        <div className="group rounded bg-white shadow-xl overflow-hidden relative h-96 border border-gray-300 transition-transform transform hover:scale-105">
 
             <div className="">
                 <img src={image} className="w-full h-52 shadow-md" />
@@ -83,6 +84,7 @@ const SingleRecommendedProduct = ({ singleProduct }) => {
                 Add To Cart
             </button>
         </div>
+
     );
 };
 

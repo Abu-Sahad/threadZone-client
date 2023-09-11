@@ -81,7 +81,7 @@ const AddCategory = ({ categoryList }) => {
                     category: categoryName,
                     image: imageURL
                 }
-                axios.post('https://thread-zone-server.vercel.app/addCategory', categoryObject)
+                axios.post('https://thread-zone-server-abu-sahad.vercel.app/addCategory', categoryObject)
                     .then((res) => {
                         if (res.data.status) {
                             Swal.fire({
