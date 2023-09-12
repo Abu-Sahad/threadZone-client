@@ -8,7 +8,7 @@ const ReturnDetails = () => {
 
     const returnFun = async () => {
         try {
-            const res = await axios.post('https://thread-zone-server.vercel.app/getSingleReview', { id: params.id });
+            const res = await axios.post('http://localhost:5000/getSingleReview', { id: params.id });
             setData(res.data);
             // console.log('review data ', res.data);
         } catch (err) {

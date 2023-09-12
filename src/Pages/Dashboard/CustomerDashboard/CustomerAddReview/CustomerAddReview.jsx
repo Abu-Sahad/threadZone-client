@@ -26,7 +26,7 @@ const CustomerAddReview = () => {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/getSingleOrder', { id })
+    axios.post('http://localhost:5000/getSingleOrder', { id })
       .then((res) => {
         setProductData(res.data[0]);
         const { productName, productId, shopName, shopId, image } = res.data[0];
@@ -111,7 +111,7 @@ const CustomerAddReview = () => {
     setTimeout(() => {
       console.log("All Images ", allImage);
       let newArray = { ...review, image: allImage, description: description };
-      axios.post('https://thread-zone-server.vercel.app/addReview', newArray)
+      axios.post('http://localhost:5000/addReview', newArray)
         .then(res => {
           if (res.data.status) {
             Swal.fire({

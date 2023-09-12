@@ -15,7 +15,7 @@ const Address = () => {
         e.preventDefault();
         console.log("full address ", address);
 
-        axios.post('https://thread-zone-server.vercel.app/addAddress', address)
+        axios.post('http://localhost:5000/addAddress', address)
             .then(res => {
                 if (res.data.status === true) {
                     Swal.fire({

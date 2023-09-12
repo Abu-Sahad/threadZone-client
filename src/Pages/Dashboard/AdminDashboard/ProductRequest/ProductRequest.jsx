@@ -8,7 +8,7 @@ const ProductRequest = () => {
 
 
     useEffect(() => {
-        axios.get('https://thread-zone-server.vercel.app/getApproveProduct')
+        axios.get('http://localhost:5000/getApproveProduct')
             .then(res => {
                 setAllProduct(res.data);
             })

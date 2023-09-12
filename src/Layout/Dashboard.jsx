@@ -40,8 +40,7 @@ const Dashboard = () => {
                         </div>
 
                         <ul className="bg-base-200 rounded-md h-[80%] p-5 pl-10">
-                            {
-                                isAdmin ? (
+                            {/* {isAdmin ? ( ) : (isSeller ? (       ) : (       ))} */}
                                     <>
                                         <li><Link to='/'><FaHome />Home</Link></li>
                                         <li><Link to='/dashboard/manageUsers'>Manage Users</Link></li>
@@ -67,7 +66,7 @@ const Dashboard = () => {
                                         <li><Link to='/'>Home</Link></li>
 
                                     </>
-                                ) : (isSeller ? (
+                                
                                     <>
                                         <li><Link to='/'><FaHome />Home</Link></li>
                                         <li><Link to='/dashboard/orderList'>Complete Order List</Link></li>
@@ -80,7 +79,7 @@ const Dashboard = () => {
                                         <li><Link to='/dashboard/sellerNotification'>Seller Notification</Link></li>
 
                                     </>
-                                ) : (
+                          
                                     <>
                                         <li className="">
                                             <span className="text-red-600">Manage Account</span>
@@ -98,8 +97,8 @@ const Dashboard = () => {
                                         <li><Link to='/dashboard/customerNotification'>Customer Notification</Link></li>
 
                                     </>
-                                ))}
-
+                          
+                         </ul>
                     </div>
                 </div>
                 

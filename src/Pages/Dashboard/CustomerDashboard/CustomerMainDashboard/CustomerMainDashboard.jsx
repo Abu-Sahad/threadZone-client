@@ -8,7 +8,7 @@ const CustomerMainDashboard = () => {
     console.log("user id ", userInfo._id)
 
     useEffect(() => {
-        axios.post('https://thread-zone-server.vercel.app/orderVsPrice', { userId: userInfo._id })
+        axios.post('http://localhost:5000/orderVsPrice', { userId: userInfo._id })
             .then(res => {
                 setPriceData(res.data);
                 console.log("price data ", res.data);

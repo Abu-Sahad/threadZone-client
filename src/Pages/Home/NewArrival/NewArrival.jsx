@@ -7,7 +7,7 @@ const NewArrival = () => {
 
     useEffect(() => {
         // Fetch data from the API using Axios
-        axios.get('https://thread-zone-server.vercel.app/newArrival')
+        axios.get('http://localhost:5000/newArrival')
             .then(response => {
                 // Sort the data by update date in ascending order
 

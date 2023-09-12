@@ -40,7 +40,7 @@ const ProductGridSingle = (params) => {
 
      const handleAddProduct = () => {
           console.log("product is submitted ");
-          axios.post('https://thread-zone-server.vercel.app/orderSubmit', productInfo)
+          axios.post('http://localhost:5000/orderSubmit', productInfo)
                .then(res => {
                     console.log("product is added", res.data);
                     Swal.fire({

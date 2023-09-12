@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { ProductContext } from '../../../Contexts/ProductContext';
 
-const TemplatePagination = () => {
-    const {state,totalProduct,dispatch} = useContext(ProductContext);
+const TemplatePagination = ({totalProduct}) => {
+    const {state,dispatch} = useContext(ProductContext);
     const maxPage = Math.ceil(totalProduct/9);
 
     const changePage = (index)=>{

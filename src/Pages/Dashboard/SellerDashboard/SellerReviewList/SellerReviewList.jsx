@@ -15,7 +15,7 @@ const SellerReviewList = () => {
       shopId: userInfo.shopId,
       shopName: userInfo.shopName
     }
-    axios.post("https://thread-zone-server.vercel.app/getReviewList", info)
+    axios.post("http://localhost:5000/getReviewList", info)
       .then(res => {
         setReturnList(res.data);
         console.log("all reviewed data ", res.data);

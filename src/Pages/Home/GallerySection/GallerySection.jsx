@@ -13,7 +13,7 @@ const GallerySection = () => {
     const [galleries, setGallery] = useState([]);
 
     useEffect(() => {
-        fetch('https://thread-zone-server.vercel.app/gallery')
+        fetch('http://localhost:5000/gallery')
             .then(res => res.json())
             .then(data => setGallery(data));
     }, []);

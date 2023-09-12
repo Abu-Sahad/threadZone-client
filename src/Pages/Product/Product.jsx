@@ -13,25 +13,41 @@ import axios from 'axios';
 import TemplatePagination from '../../Shared/Template/TemplateSidebar/TemplatePagination';
 
 const Product = () => {
-  const { state, dispatch, product } = useContext(ProductContext);
+  const { state, dispatch} = useContext(ProductContext);
   const [view, setView] = useState('grid');
-  const [productInfo, setProductInfo] = useState({});
+  const [productInfo, setProductInfo] = useState({}); 
+  
 
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/productInformation')
+    axios.post('http://localhost:5000/getProducts', state)
+      .then((res) => {
+        setTotalProduct(res.data.totalProduct);
+        setProduct(res.data.productArray);
+      })
+      .catch((err) => {
+        console.log('Error:', err);
+      });
+  }, [state]);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/productInformation')
       .then(res => {
         setProductInfo(res.data);
-        // console.log("product information ",res.data.colorList);
       })
       .catch(err => console.log(err));
   }, [])
+
+  const setDefault = ()=>{
+      dispatch({type:'SET_DEFAULT'})
+  }
 
   return (
 
     <div className="w-full mx-auto px-4 grid lg:grid-cols-4 gap-4 pt-4 items-start relative pb-4">
       {/* SideBar Start here  */}
-      <div className="col-span-1 font-poppins pb-6 shadow-lg rounded overflow-hidden absolute lg:static left-4 top-16 z-10 w-72 lg:w-full lg:block px-5 py-5 ">
+      <div className="col-span-1 font-poppins pb-6 shadow-lg rounded overflow-hidden absolute lg:static left-4 top-16 z-10 w-72 lg:w-full lg:block px-5 py-5 hidden md:block">
         <div className=" divide-y space-y-5 relative">
+          <button className='w-48 h-10 border border-cDarkBlue text-cDarkBlue hover:bg-cDarkBlue hover:text-white rounded-sm' type="button" onClick={setDefault}>Reset Filter</button>
           {productInfo.ratingList && <TemplateStar starType={productInfo.ratingList} />}
           <TemplateSize />
           <TemplatePrice />
@@ -45,7 +61,7 @@ const Product = () => {
         {view === 'grid' && <TemplateGridView productList={product} />}
         {view === 'list' && <TemplateListView productList={product} />}
         <div className='mt-5 mx-auto'>
-          <TemplatePagination />
+          <TemplatePagination  totalProduct={totalProduct}/>
         </div>
       </div>
 

@@ -7,7 +7,7 @@ const RecommendedProduct = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('https://thread-zone-server.vercel.app/recomended')
+        axios.get('http://localhost:5000/recomended')
             .then(response => {
                 const data = response.data;
 

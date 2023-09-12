@@ -6,7 +6,7 @@ const AdminNotification = () => {
   const [notification, setNotification] = useState([]);
 
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/getNotification', { role: 'admin' })
+    axios.post('http://localhost:5000/getNotification', { role: 'admin' })
       .then(res => {
         setNotification(res.data);
       })
@@ -15,7 +15,7 @@ const AdminNotification = () => {
   const handleRead = (id) => {
     const singleNot = notification.find(item => item._id == id);
     //if(!singleNot.isRead){
-    axios.post('https://thread-zone-server.vercel.app/updateNotification', { id: id })
+    axios.post('http://localhost:5000/updateNotification', { id: id })
       .then(res => {
         if (res.data.status) {
           Swal.fire({
@@ -36,7 +36,7 @@ const AdminNotification = () => {
   }
 
   const deleteNotification = (id) => {
-    axios.post('https://thread-zone-server.vercel.app/deleteNotification', { id: id })
+    axios.post('http://localhost:5000/deleteNotification', { id: id })
       .then(res => {
         if (res.data.status) {
           Swal.fire({

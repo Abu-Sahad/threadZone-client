@@ -1,5 +1,4 @@
 import React, { useContext,} from 'react';
-import { AllContext } from '../../../Contexts/AllContext';
 import { ProductContext } from '../../../Contexts/ProductContext';
 
 const TemplateColor = ({allColor}) => {
@@ -13,7 +12,6 @@ const TemplateColor = ({allColor}) => {
         <div className='mt-5'>
           <h3 className='text-xl mt-5 text-gray-800 mb-3 uppercase font-medium'>Color</h3>
           <div className="flex flex-wrap items-center gap-2  ">
-            {/* single item */} 
             { 
             allColor.map((color) => 
             <div key={color._id} className="color-selector">

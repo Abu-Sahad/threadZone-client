@@ -48,7 +48,7 @@ const AllProvider = ({ children }) => {
 
 
   useEffect(() => {
-    axios.get('https://thread-zone-server.vercel.app/getAllProduct')
+    axios.get('http://localhost:5000/getAllProduct')
       .then((res) => {
         dispatch({ type: 'SET_PRODUCTS', payload: res.data });
       })

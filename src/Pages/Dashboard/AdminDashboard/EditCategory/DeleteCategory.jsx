@@ -9,7 +9,7 @@ const DeleteCategory = () => {
     const [allCategory, setAllCategory] = useState([]);
 
     useEffect(() => {
-        axios.get("https://thread-zone-server.vercel.app/getAllCategory")
+        axios.get("http://localhost:5000/getAllCategory")
             .then((res) => {
                 setAllCategory(res.data);
             })
@@ -30,7 +30,7 @@ const DeleteCategory = () => {
 
             const afterDelete = allCategory.filter(cat => cat._id !== id);
             setAllCategory(afterDelete);
-            axios.post("https://thread-zone-server.vercel.app/deleteCategory", { id })
+            axios.post("http://localhost:5000/deleteCategory", { id })
                 .then(res => {
                     console.log(res.data);
                 })

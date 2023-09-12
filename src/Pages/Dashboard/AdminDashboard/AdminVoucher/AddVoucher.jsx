@@ -28,7 +28,7 @@ const AddVoucher = ({ voucherList }) => {
             })
         } else {
 
-            axios.post('https://thread-zone-server.vercel.app/addVoucher', voucher)
+            axios.post('http://localhost:5000/addVoucher', voucher)
                 .then((res) => {
                     if (res.data.status) {
                         Swal.fire({

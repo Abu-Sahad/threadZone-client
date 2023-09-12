@@ -9,7 +9,7 @@ const TemplateDetails = () => {
   const params = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/getSingleProduct', { productId: params.id })
+    axios.post('http://localhost:5000/getSingleProduct', { productId: params.id })
       .then(res => {
         setProduct(res.data[0]);
         // console.log(" image check ",res.data[0].image)

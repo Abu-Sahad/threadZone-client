@@ -10,7 +10,7 @@ const SellerDashboardTop = () => {
   const { userInfo } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/findDashboardInformation', { shopId: userInfo.shopId, role: "seller" })
+    axios.post('http://localhost:5000/findDashboardInformation', { shopId: userInfo.shopId, role: "seller" })
       .then(res => {
         setInfo(res.data[0]);
         console.log("dashboard info ", res.data[0]);

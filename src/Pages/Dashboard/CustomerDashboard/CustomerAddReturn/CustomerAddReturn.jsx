@@ -46,7 +46,7 @@ const CustomerAddReturn = () => {
   };
 
   useEffect(() => {
-    axios.post('https://thread-zone-server.vercel.app/getSingleOrder', { id })
+    axios.post('http://localhost:5000/getSingleOrder', { id })
       .then((res) => {
         console.log("product data ", res.data);
         setProductData(res.data[0]);
@@ -104,7 +104,7 @@ const CustomerAddReturn = () => {
         newArray = { ...review, image: allImage };
       }
 
-      axios.post('https://thread-zone-server.vercel.app/addReview', newArray)
+      axios.post('http://localhost:5000/addReview', newArray)
         .then(res => {
           if (res.data.status) {
             Swal.fire({

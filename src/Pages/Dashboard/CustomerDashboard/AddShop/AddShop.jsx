@@ -15,7 +15,7 @@ const AddShop = () => {
 
     const handleShop = (e) => {
         e.preventDefault();
-        axios.post('https://thread-zone-server.vercel.app/addShop', shop)
+        axios.post('http://localhost:5000/addShop', shop)
             .then(res => {
                 console.log("addProduct", res.data);
                 Swal.fire({

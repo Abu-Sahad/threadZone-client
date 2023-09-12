@@ -1,14 +1,61 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Providers/AuthProvider';
+import {getStorage, getDownloadURL, ref, uploadBytes} from 'firebase/storage';
+import {app} from '../../firebase/firebase.config';
+import {v4 as uuidv4} from 'uuid';
+//import profileImage from '../../assets/profileImage.jpg'
 const Registration = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
-    const { createUser, updateProfileArea } = useContext(AuthContext)
-    const onSubmit = (data) => {
+    const { createUser, updateProfileArea } = useContext(AuthContext);
+    const [selectedImages,setSelectedImages] = useState(null);
+   
+    const profileImage = "https://firebasestorage.googleapis.com/v0/b/threadzone-30d7b.appspot.com/o/threadZone%2Fimage%2Ffb968c24-0567-4049-a1c0-e37ce3d2ae6c_27470334_7309681.jpg?alt=media&token=2e8fbffe-8d7a-4450-bd13-1fc716a7af5a";
+    
+      //firebase config 
+  const Storage = getStorage(app);
+   //Image Upload 
+     const uniqueId = uuidv4();
+
+  const uploadImages = async () => {
+    let imageUrls;
+      const imageName = `${uniqueId}_${image.name}`;
+      const imageRef = ref(Storage, `threadZone/image/${imageName}`);
+      await uploadBytes(imageRef, image)
+        .then((snapshot) => {
+          getDownloadURL(snapshot.ref)
+            .then((url) => {
+              imageUrls.push(url);
+            })
+        })
+    return imageUrls;
+  };
+
+    const onSubmit = async(data) => {
         console.log(data);
+        let photoURL = profileImage;
+        if(selectedImages){
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 8000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+        Toast.fire({
+        icon: 'info',
+        title: 'Waiting for image being uploaded !! '
+        })
+        const imageURL = await uploadImages();
+           photoURL = imageURL;
+        }
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
@@ -16,8 +63,8 @@ const Registration = () => {
                 return updateProfileArea(data.name, data.photoURL); // Return the promise
             })
             .then(() => {
-                const saveUser = { name: data.name, email: data.email, photoURL: data.photoUrl, gender: data.gender, phoneNumber: data.phoneNumber, address: data.address };
-                return fetch('https://thread-zone-server.vercel.app/users', {
+                const saveUser = { name: data.name, email: data.email, photoURL,  phoneNumber: data.phoneNumber, address: data.address,role:'customer' };
+                return fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -89,7 +136,7 @@ const Registration = () => {
                                     {...register('password', {
                                         required: true,
                                         minLength: 6,
-                                        pattern: /(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()]).*/,
+                                        pattern: /(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()/]).*/,
                                     })}
                                 />
                                 {errors.password?.type === 'required' && (
@@ -125,16 +172,16 @@ const Registration = () => {
                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
                             <div>
                                 <label className="block text-gray-700 font-bold mb-2" htmlFor="photoUrl">
-                                    Photo URL
+                                    Photo
                                 </label>
                                 <input
                                     className="border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-                                    type="text"
+                                    type="file"
                                     id="photoUrl"
-                                    {...register('photoUrl')}
+                                    onClick={(e)=>{setSelectedImages(e.target.files[0])}}
                                 />
                             </div>
-                            <div>
+                            {/* <div>
                                 <label className="block text-gray-700 font-bold mb-2" htmlFor="gender">
                                     Gender
                                 </label>
@@ -146,7 +193,7 @@ const Registration = () => {
                                 />
                             </div>
                         </div>
-                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'>
+                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4'> */}
                             <div>
                                 <label className="block text-gray-700 font-bold mb-2" htmlFor="phoneNumber">
                                     Phone Number

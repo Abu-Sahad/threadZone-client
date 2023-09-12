@@ -16,8 +16,8 @@ const SocialLogIn = () => {
             .then(result => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser)
-                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photoURL: loggedInUser.photoURL }
-                return fetch('https://thread-zone-server.vercel.app/users', {
+                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, photoURL: loggedInUser.photoURL,role:'customer' }
+                return fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -44,7 +44,7 @@ const SocialLogIn = () => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser)
                 const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
-                return fetch('https://thread-zone-server.vercel.app/users', {
+                return fetch('http://localhost:5000/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

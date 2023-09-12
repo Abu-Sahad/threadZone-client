@@ -12,6 +12,7 @@ const initialState = {
   color: null,
   category: null,
   page: 1,
+  shopId:null
 };
 
 const productReducer = (state, action) => {
@@ -32,47 +33,21 @@ const productReducer = (state, action) => {
     case 'FILTER_BY_CATEGORY':
       return { ...state, category: action.payload };
     case 'SET_PAGE':
-      console.log("set page ", action.payload)
       return { ...state, page: action.payload };
     case 'SET_TOTAL_PRODUCT':
       return { ...state, totalProduct: action.payload };
-    case 'DEFAULT':
-      return {
-        ...state,
-        sortBy: null,
-        filterByRating: null,
-        minPrice: null,
-        maxPrice: null,
-        size: null,
-        color: null,
-        category: null
-      }
+    case 'SET_SHOP':
+       return {...state,shopId:action.payload};
     default:
       return state;
   }
 };
 
 const ProductProvider = ({ children }) => {
-  const [product, setProduct] = useState([]);
   const [state, dispatch] = useReducer(productReducer, initialState);
-  const [totalProduct, setTotalProduct] = useState(1);
-
-  useEffect(() => {
-
-    axios.post('https://thread-zone-server.vercel.app/getProducts', state)
-      .then((res) => {
-        // dispatch({ type: 'SET_TOTAL_PRODUCT', payload: res.data.totalProduct});
-        setTotalProduct(res.data.totalProduct);
-        setProduct(res.data.productArray);
-      })
-      .catch((err) => {
-        console.log('Error:', err);
-      });
-
-  }, [state]);
 
   return (
-    <ProductContext.Provider value={{ state, dispatch, product, totalProduct }}>
+    <ProductContext.Provider value={{ state, dispatch}}>
       {children}
     </ProductContext.Provider>
   );

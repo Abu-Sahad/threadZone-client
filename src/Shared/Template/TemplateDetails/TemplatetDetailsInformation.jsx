@@ -69,7 +69,7 @@ const TemplateDetailsInformation = ({ productData }) => {
 
      const handleAddProduct = () => {
           console.log("product Information ", productInfo)
-          axios.post('https://thread-zone-server.vercel.app/orderSubmit', productInfo)
+          axios.post('http://localhost:5000/orderSubmit', productInfo)
                .then(res => {
                     if (res.data.status) {
                          Swal.fire({

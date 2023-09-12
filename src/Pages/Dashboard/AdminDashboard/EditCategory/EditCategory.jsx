@@ -6,7 +6,7 @@ import axios from 'axios';
 function EditCategory() {
   const [AllCategory, setAllCategory] = useState([]);
   useEffect(() => {
-    axios.get("https://thread-zone-server.vercel.app/getAllCategory")
+    axios.get("http://localhost:5000/getAllCategory")
       .then((res) => {
         setAllCategory(res.data);
         console.log("Category Data ", res.data)
