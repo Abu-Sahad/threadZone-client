@@ -15,13 +15,15 @@ import TemplatePagination from '../../Shared/Template/TemplateSidebar/TemplatePa
 const Product = () => {
   const { state, dispatch} = useContext(ProductContext);
   const [view, setView] = useState('grid');
+  const [product,setProduct] = useState([]);
+  const [totalProduct,setTotalProduct] = useState([]);
   const [productInfo, setProductInfo] = useState({}); 
-  
 
   useEffect(() => {
     axios.post('http://localhost:5000/getProducts', state)
       .then((res) => {
         setTotalProduct(res.data.totalProduct);
+        console.log("product info ",res.data.totalProduct)
         setProduct(res.data.productArray);
       })
       .catch((err) => {
@@ -30,6 +32,7 @@ const Product = () => {
   }, [state]);
 
   useEffect(() => {
+  
     axios.get('http://localhost:5000/productInformation')
       .then(res => {
         setProductInfo(res.data);
@@ -42,7 +45,6 @@ const Product = () => {
   }
 
   return (
-
     <div className="w-full mx-auto px-4 grid lg:grid-cols-4 gap-4 pt-4 items-start relative pb-4">
       {/* SideBar Start here  */}
       <div className="col-span-1 font-poppins pb-6 shadow-lg rounded overflow-hidden absolute lg:static left-4 top-16 z-10 w-72 lg:w-full lg:block px-5 py-5 hidden md:block">
@@ -64,10 +66,9 @@ const Product = () => {
           <TemplatePagination  totalProduct={totalProduct}/>
         </div>
       </div>
-
-
     </div>
   );
 };
 
 export default Product;
+

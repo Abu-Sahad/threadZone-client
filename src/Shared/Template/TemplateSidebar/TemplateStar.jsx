@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ProductContext } from '../../../Contexts/ProductContext';
 
 const TemplateStar = ({starType}) => {
+  // console.log("star type ",starType);
   const {state,dispatch} = useContext(ProductContext);
   const [starNumber,setStarNumber] = useState(null);
  const getStar = (e)=>{
@@ -18,9 +19,9 @@ const TemplateStar = ({starType}) => {
             {/* Category Item Start here  */}
             <form>
              {starType.map(star=>   
-           <div key={star._id} className="space-y-2 px-5 hover:text-cDarkBlue flex items-center">
-                  <input onClick={getStar} id={star._id} checked={starNumber===star._id} value={star._id} type="checkbox" className='text-primary focus:right-0 rounded-sm cursor-pointer'/>
-                  <label htmlFor="star"  className='text-gray-600 ml-3 cursor-pointer '>{star._id} Star</label>
+           <div key={star._id?.category} className="space-y-2 px-5 hover:text-cDarkBlue flex items-center">
+                  <input onClick={getStar} id={star._id?.category} checked={starNumber===star._id?.category} value={star._id?.category} type="checkbox" className='text-primary focus:right-0 rounded-sm cursor-pointer'/>
+                  <label htmlFor="star"  className='text-gray-600 ml-3 cursor-pointer '>{star._id?.category} Star</label>
                   <div className="ml-auto text-gray-600 text-sm">({star.totalProduct})</div>
             </div>
              )}  

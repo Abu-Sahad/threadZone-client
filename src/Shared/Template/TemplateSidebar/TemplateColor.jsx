@@ -14,9 +14,9 @@ const TemplateColor = ({allColor}) => {
           <div className="flex flex-wrap items-center gap-2  ">
             { 
             allColor.map((color) => 
-            <div key={color._id} className="color-selector">
-              <input type="radio" value={color._id} onClick={setColor} className='hidden' name="color" id={color._id}/>
-              <label htmlFor={color._id} style={{backgroundColor:color._id}} className="text-sm  p-3 border  border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-white" >{color.totalProduct}</label>     
+            <div key={color._id?.color} className="color-selector">
+              <input type="radio" value={color._id?.color} onClick={setColor} className='hidden' name="color" id={color._id?.color}/>
+              <label htmlFor={color._id?.color} style={{backgroundColor:color._id?.color}} className="text-sm  p-3 border  border-gray-200 rounded-sm h-6 w-6 flex items-center justify-center cursor-pointer shadow-sm text-white" >{color.totalProduct}</label>     
             </div> 
             )
            }  

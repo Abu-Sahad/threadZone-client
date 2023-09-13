@@ -4,15 +4,16 @@ import ShopProduct from './ShopProduct';
 import { useParams } from 'react-router-dom';
 import Product from '../Product/Product';
 import ProductContainer from '../Product/ProductContainer';
+import { ProductProvider } from '../../Contexts/ProductContext';
+import ShopSingle from './ShopSingle/ShopSingle';
 
 const ShopProductContainer = () => {
     const params = useParams();
     return (
         <div>
-            {/* <AllProvider >
-                <ShopProduct id={params.id} />
-            </AllProvider> */}
-            <ProductContainer/>
+            <ProductProvider>
+                <ShopSingle shopId={params.id}/>
+            </ProductProvider>
         </div>
     );
 };
