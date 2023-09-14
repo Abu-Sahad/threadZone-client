@@ -18,10 +18,10 @@ const CustomerReviewList = () => {
       .then(res => {
         setReturnList(res.data);
       })
-      .then(err => {
+      .catch(err => {
         console.log(err);
       })
-  }, [])
+  }, [userInfo])
 
   return (
     <div className="overflow-x-auto">
@@ -36,7 +36,6 @@ const CustomerReviewList = () => {
             </th>
             <th>Product Name</th>
             <th>Shop Name</th>
-            <th>Price</th>
             <th>Delivery Date</th>
             <th>Status</th>
           </tr>
@@ -68,7 +67,6 @@ const CustomerReviewList = () => {
 
                   <span className="badge badge-ghost badge-sm">{product.shopName}</span>
                 </td>
-                <td>$ {product.price}</td>
                 <td>{product.postDate}</td>
                 <th>
                   <Link to={`/dashboard/returnDetails/${product._id}`} className={`btn btn-ghost bg-cLightBlue px-3 hover:text-black text-white btn-xs }`}> View </Link>

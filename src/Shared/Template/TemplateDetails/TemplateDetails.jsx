@@ -9,12 +9,11 @@ const TemplateDetails = () => {
   const params = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    axios.post('http://localhost:5000/getSingleProduct', { productId: params.id })
+    axios.post('http://localhost:5000/getSingleProduct', { productId: params.productId })
       .then(res => {
-        setProduct(res.data[0]);
-        // console.log(" image check ",res.data[0].image)
+        setProduct(res.data);
+         console.log(" image check ", res.data)
       })
-
       .catch(err=>{console.log(err)});
     },[])
  return (

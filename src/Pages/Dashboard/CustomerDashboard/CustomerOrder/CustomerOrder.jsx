@@ -1,27 +1,28 @@
 import React, { useContext } from 'react';
 import {useEffect, useState} from 'react';
 import { OrderContext } from '../../../../Contexts/OrderContext';
+import axios from 'axios';
+import {AuthContext} from '../../../../Providers/AuthProvider';
 
 const CustomerOrder = () => {
-   const {allOrder} = useContext(OrderContext);
   const [products,setProducts] = useState([]);
+  const { userInfo } = useContext(AuthContext);
+ // console.log("user Info ",userInfo);
   useEffect(()=>{
-
-     const newArray = allOrder.filter((item)=>item.status==='approved' || item.status==='warehouse' )
-    setProducts(newArray);
+    axios.post('http://localhost:5000/getCustomerOrderList',{userId:userInfo._id})
+    .then(res=>setProducts(res.data))
+    .catch(err=>console.log(err));
   },[])
 
+   console.log("customer orderList ",products)
     return (
   <div className="overflow-x-auto mt-10">
   <table className="table">
     {/* head */}
     <thead>
       <tr>
-        <th>
-        </th>
         <th>Product Name</th>
         <th>Shop Name</th>
-        <th>Price</th>
         <th>Delivery Date</th>
         <th>Status</th>
       </tr>
@@ -31,11 +32,7 @@ const CustomerOrder = () => {
       {
         products.map((product,index)=>
           <tr key={index}>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" value={product.id}/>
-          </label>
-        </th>
+        
         <td>
           <div className="flex items-center space-x-3">
             <div className="avatar">
@@ -53,11 +50,10 @@ const CustomerOrder = () => {
           
           <span className="badge badge-ghost badge-sm">{product.shopName}</span>
         </td>
-        <td>$ {product.quantity*product.userId}</td>
         <td>{product.date}</td>
         <th>
-          <button className={`btn btn-ghost  hover:text-black ${product.status==='warehouse'?'bg-blue-500' : 'bg-yellow-500'} text-white btn-xs` }>
-           {product.status==='warehouse'?'Warehouse':'Approve'}
+          <button className={`btn btn-ghost  hover:text-black ${product.status==='warehouse'?'bg-blue-500' : 'bg-green-500'} text-white btn-xs` }>
+           {product.status==='warehouse'?'Warehouse':'Delivered'}
             </button>
         </th>
       </tr>

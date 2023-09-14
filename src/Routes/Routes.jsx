@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
         path: 'shopCart',
         element: <ShoppingCart />
       },{
-        path: 'product/productDetails/:id',
+        path: 'product/productDetails/:productId',
         element: <TemplateDetails />
       },{
         path: 'category/:categoryName',

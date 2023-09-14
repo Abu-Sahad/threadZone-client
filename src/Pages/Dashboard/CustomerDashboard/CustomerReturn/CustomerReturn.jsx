@@ -17,6 +17,7 @@ const CustomerReturn = () => {
     axios.post("http://localhost:5000/getReturnList", info)
       .then(res => {
         setReturnList(res.data);
+        console.log("return Data ".res.data)
       })
       .then(err => {
         console.log(err);
@@ -29,25 +30,15 @@ const CustomerReturn = () => {
         {/* head */}
         <thead>
           <tr>
-            <th>
-            </th>
             <th>Product Name</th>
             <th>Shop Name</th>
-            <th>Price</th>
-            <th>Delivery Date</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
           {
             returnList.map((product) =>
               <tr key={product._id}>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" value={product.id} />
-                  </label>
-                </th>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
@@ -65,7 +56,6 @@ const CustomerReturn = () => {
 
                   <span className="badge badge-ghost badge-sm">{product.shopName}</span>
                 </td>
-                <td>$ {parseInt(product.quantity) * parseInt(product.price)}</td>
                 <td>{product.date}</td>
                 <th>
                   <Link to={`/dashboard/returnDetails/${product._id}`} className={`btn btn-ghost hover:text-black text-white btn-xs  bg-red-500`}>

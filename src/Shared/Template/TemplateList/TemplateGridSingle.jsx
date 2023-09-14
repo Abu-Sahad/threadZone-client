@@ -34,7 +34,6 @@ const TemplateGridSingle = (params) => {
           price,
           size
      }
-
      const handleAddProduct = () => {
           console.log("product is submitted ");
           axios.post('http://localhost:5000/orderSubmit', productInfo)
@@ -56,7 +55,7 @@ const TemplateGridSingle = (params) => {
                     <img src={image} className="w-full h-72 shadow-md" />
 
                     <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition ">
-                         <Link to={`productDetails/${id}`} className="text-white text-lg w-9 h-9 rounded-full bg-cDarkBlue hover:bg-gray-800 transition flex  items-center justify-center " >
+                         <Link to={`productDetails/${params.item._id}`} className="text-white text-lg w-9 h-9 rounded-full bg-cDarkBlue hover:bg-gray-800 transition flex  items-center justify-center " >
                               <FontAwesomeIcon icon={faNotEqual} />
 
                          </Link>
@@ -67,13 +66,13 @@ const TemplateGridSingle = (params) => {
                </div>
 
     <div className="pt-4 pb-3 px-4 ">
-         <Link  to={`../product/productDetails/${params.item._id}`}>  
+         <Link  to={`/productDetails/${params.item._id}`}>  
               {/* <h4 className="uppercase font-medium text-xl mb-2 h-18 text-gray-800 hover:text-primary transition ">{productName} </h4>  */}
          </Link>
 
 
                <div className="pt-4 pb-3 px-4 ">
-                    <Link to={`../product/productDetails/${id}`}>
+                    <Link to={`../product/productDetails/${params.item._id}`}>
                          <h4 className="uppercase font-medium text-base mb-1 text-gray-800 hover:text-primary transition ">{productName} </h4>
                     </Link> 
                     <Link className='font-poppins text-gray-500 text-sm -mt-4' to={`../shopSingle/${shopId}`}>{shopName}</Link>

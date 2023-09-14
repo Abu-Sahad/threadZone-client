@@ -19,7 +19,7 @@ const ShoppingCart = () => {
                 console.log(err);
             })
 
-    }, [userInfo])
+    },[userInfo])
 
 
     const calculateTotalPrice = () => {

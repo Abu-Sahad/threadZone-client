@@ -50,10 +50,6 @@ const TemplateSingle = (params) => {
                     console.log(err);
                })
      }
-     // //console.log("Id =>",id)
-     // const wordsArray = discription.split(/\s+/);
-     // const first20WordsArray = wordsArray.slice(0, 20);
-     // const description = first20WordsArray.join(' ');
 
      return (
           <div className="group rounded bg-white shadow-xl overflow-hidden flex flex-col md:flex-row">
@@ -70,7 +66,7 @@ const TemplateSingle = (params) => {
                </div>
 
                <div className="pt-8 pb-3 ms-10 flex flex-col justify-start items-start">
-                    <Link to={`../product/productDetails/${id}`} >
+                    <Link to={`../product/productDetails/${params.item._id}`} >
                          <h4 className="uppercase font-medium text-xl mb-2 h-18 text-gray-800 text-left hover:text-primary transition mx-auto">{productName} </h4>
                     </Link>
 

@@ -98,7 +98,7 @@ const AddProduct = () => {
 
     console.log("all Images ", allImage);
     // setProductInfo(value=>({...value,image:allImage}));
-    const newArray = { ...productInfo, image: allImage, description: description };
+    const newArray = { ...productInfo, image: allImage, description: description,price:parseInt(productInfo.price),discount:parseInt(productInfo.discount),quantity:parseInt(productInfo.quantity) };
     console.log("New Array ", newArray);
     axios.post('https://thread-zone-server.vercel.app/addProduct', newArray)
       .then(res => {

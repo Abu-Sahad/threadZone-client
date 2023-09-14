@@ -7,10 +7,8 @@ import { FaHome } from 'react-icons/fa';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext)
-
     const [isAdmin, isAdminLoading] = useAdmin();
     const [isSeller, isSellerLoading] = useSeller();
-
     if (isAdminLoading || isSellerLoading) {
         return <div>Loading...</div>;
     }
@@ -20,11 +18,8 @@ const Dashboard = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
                     {/* Page content here */}
-
                     <Outlet></Outlet>
-
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -38,14 +33,12 @@ const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-
                         <ul className="bg-base-200 rounded-md h-[80%] p-5 pl-10">
                             {/* {isAdmin ? ( ) : (isSeller ? (       ) : (       ))} */}
                                     <>
                                         <li><Link to='/'><FaHome />Home</Link></li>
                                         <li><Link to='/dashboard/manageUsers'>Manage Users</Link></li>
                                         <li><Link to='/dashboard/adminMainDashboard'>Admin Dashboard</Link></li>
-                                        <li><Link to='/dashboard/shopRequest'>Admin Sop Approval</Link></li>
                                         <li><Link to='/dashboard/editCategory'>Admin Edit Category</Link></li>
                                         <li><Link to='/dashboard/shopRequest'>Admin Shop Approval</Link></li>
                                         <li><Link to='/dashboard/productRequest'>Admin Product Approval</Link></li>
@@ -64,7 +57,6 @@ const Dashboard = () => {
                                             <Link className="text-red-600">My WishList</Link>
                                         </li>
                                         <li><Link to='/'>Home</Link></li>
-
                                     </>
                                 
                                     <>
@@ -77,9 +69,7 @@ const Dashboard = () => {
                                         <li><Link to='/dashboard/sellerReturnList'>Seller Return List  </Link></li>
                                         <li><Link to='/dashboard/sellerProductEdit'>Seller Product Edit  </Link></li>
                                         <li><Link to='/dashboard/sellerNotification'>Seller Notification</Link></li>
-
                                     </>
-                          
                                     <>
                                         <li className="">
                                             <span className="text-red-600">Manage Account</span>

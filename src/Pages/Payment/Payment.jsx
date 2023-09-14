@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -12,7 +12,6 @@ const Payment = () => {
   const location = useLocation();
   const { cartItems } = location.state;
   const [isSelect, setIsSelect] = useState(true);
-
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
 
   useEffect(() => {
@@ -23,15 +22,15 @@ const Payment = () => {
       .then(err => {
         console.log(err);
       })
-  }, [])
+  }, [userInfo])
 
   const selectAddress = (index) => {
     const updatedArray = cartItems.map((item) => ({
       ...item,
       addressId: addressList[index]._id,
+      userId:userInfo._id
     }));
     const newArray = updatedArray.map(({ _id, ...rest }) => rest);
-    console.log("delete item", newArray)
     setOrderList(newArray);
     setIsSelect(false)
   }
@@ -53,8 +52,12 @@ const Payment = () => {
   return (
     <div>
       <h2 className="text-center text-2xl font-poppins my-5"> Order List </h2>
+      {addressList.length===0 && <div className='text-poppins flex justify-center items-center my-5 flex-col'>
+        <h2 className='text-3xl font-base my-3'>Did not find your address. Plz ad one</h2>
+        <Link to='/dashboard/address' className='btn btn-primary'> Add Address</Link>
+      </div> }
 
-      <div className="overflow-x-auto md:mx-40 md:my-10">
+     {addressList.length>0 && <div className="overflow-x-auto md:mx-40 md:my-10">
         <table className="table">
           <thead>
             <tr>
@@ -108,7 +111,7 @@ const Payment = () => {
           <button type="button" disabled={isSelect} onClick={handleOrder} className='mx-auto btn btn-error text-center text-white my-5 '>Place Order</button>
         </div>
 
-      </div>
+      </div> }
 
     </div>
   );
