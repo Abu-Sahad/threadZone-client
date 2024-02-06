@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SingleRecommendedProduct from '../singleRecommendedProduct/singleRecommendedProduct';
+// import SingleRecommendedProduct from '../singleRecommendedProduct/singleRecommendedProduct';
 import axios from 'axios';
 
 
@@ -18,15 +18,15 @@ const RecommendedProduct = () => {
 
     return (
         <section className='max-w-screen-xl mx-auto'>
-            <h1 className='text-4xl uppercase my-5'>Recommended For You</h1>
+            <h1 className='my-5 text-4xl uppercase'>Recommended For You</h1>
             <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[400px]">
-                    {products.map(singleProduct =>
+                    {/* {products.map(singleProduct =>
                         <SingleRecommendedProduct
                             key={singleProduct._id}
                             singleProduct={singleProduct}
                         ></SingleRecommendedProduct>
-                    )}
+                    )} */}
                 </div>
             </div>
         </section>

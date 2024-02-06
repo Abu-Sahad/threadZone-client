@@ -21,17 +21,15 @@ const Product = () => {
     axios.get('https://thread-zone-server-abu-sahad.vercel.app/productInformation')
       .then(res => {
         setProductInfo(res.data);
-        // console.log("product information ",res.data.colorList);
       })
       .catch(err => console.log(err));
   }, [])
 
   return (
 
-    <div className="w-full mx-auto px-4 grid lg:grid-cols-4 gap-4 pt-4 items-start relative pb-4">
-      {/* SideBar Start here  */}
-      <div className="col-span-1 font-poppins pb-6 shadow-lg rounded overflow-hidden absolute lg:static left-4 top-16 z-10 w-72 lg:w-full lg:block px-5 py-5 ">
-        <div className=" divide-y space-y-5 relative">
+    <div className="relative grid items-start w-full gap-4 px-4 pt-4 pb-4 mx-auto lg:grid-cols-4">
+      <div className="absolute z-10 col-span-1 px-5 py-5 pb-6 overflow-hidden rounded shadow-lg font-poppins lg:static left-4 top-16 w-72 lg:w-full lg:block ">
+        <div className="relative space-y-5 divide-y ">
           {productInfo.ratingList && <TemplateStar starType={productInfo.ratingList} />}
           <TemplateSize />
           <TemplatePrice />
@@ -40,11 +38,11 @@ const Product = () => {
         </div>
       </div>
       {/* //  Product List Start here */}
-      <div className="col-span-3 flex flex-col">
+      <div className="flex flex-col col-span-3">
         <ProductListTop view={view} setView={setView} />
         {view === 'grid' && <TemplateGridView productList={product} />}
         {view === 'list' && <TemplateListView productList={product} />}
-        <div className='mt-5 mx-auto'>
+        <div className='mx-auto mt-5'>
           <TemplatePagination />
         </div>
       </div>

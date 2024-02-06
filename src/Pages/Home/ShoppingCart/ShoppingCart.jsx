@@ -38,23 +38,36 @@ const ShoppingCart = () => {
                 console.log(err);
             })
     };
-
-    const incrementProduct = (_id) => {
+     const incrementProduct = (_id) => {
         const newData = cartItems.map((item) =>
             item._id === _id ? { ...item, quantity: item.quantity + 1 } : item
         );
-
         const updatedItem = newData.find((item) => item._id === _id);
-
-        if (updatedItem.quantity > updatedItem.available) {
+        if (updatedItem.quantity > 5) {
             Swal.fire({
                 icon: 'error',
                 title: 'Product not Add',
-                text: `Total ${updatedItem.available} available. You can't add anymore !!`,
+                text: `Total 5 available. You can't add anymore !!`,
             });
             return;
         }
+        setCartItems(newData);
+    };
 
+      const decrementProduct = (_id) => {
+        const newData = cartItems.map((item) =>
+            item._id === _id ? { ...item, quantity: item.quantity - 1 } : item
+        );
+        const updatedItem = newData.find((item) => item._id === _id);
+        console.log('cart item => ',updatedItem)
+        if (updatedItem.quantity === 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Product not Add',
+                text: `You can't add Zero Product anymore !!`,
+            });
+            return;
+        }
         setCartItems(newData);
     };
 
@@ -65,53 +78,46 @@ const ShoppingCart = () => {
 
 
     return (
-        <div className="gap-5 mb-10 all-site max-w-screen-xl mx-auto font-poppins">
-            <div className='left-side'>
-                <div className='flex mb-5'>
-                    <div className='text-xl flex  font-medium font-poppins w-full bg-gray-100 ps-2 pt-2 pb-2'>
-                        <h2 className='ml-40'>Product</h2>
-
-                        <h2 className='text-xl ml-36 font-medium'>Quantity</h2>
-                        <h2 className='text-xl ml-36 font-medium'>Total</h2>
+          <div className="max-w-screen-xl gap-5 mx-auto mb-10 font-poppins">
+            <div className="flex flex-col md:flex-row">
+              <div className='w-full md:w-9/12 me-10'>
+                <div className='hidden mb-5 md:block'>
+                    <div className='flex flex-row w-full pt-2 pb-2 text-xl font-medium bg-gray-100 justify-evenly font-poppins ps-2'>
+                        <h2 className='text-base'>Product</h2>
+                        <h2 className='text-base font-medium ms-36'>Quantity</h2>
+                        <h2 className='text-base font-medium ms-16'>Total</h2>
+                        <h2 className='text-base font-medium ms-16'>Remove</h2>
                     </div>
                 </div>
-
                 {cartItems.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4 mb-4 bg-gray-100 pt-5 pb-5">
-                        <img src={item.image} alt={item.name} className="w-20 h-20 ms-10" />
+                    <div key={index} className="flex flex-col items-start gap-4 pt-5 pb-5 mb-4 bg-gray-100 md:flex-row">
+                        <div className="flex flex-row"> 
+                           <img src={item.image} alt={item.name} className="w-20 h-20 ms-10" />
                         <div className="flex flex-col ms-10 me-10">
-                            <h3 className="text-xl mb-2 md:w-36">{item.productName}</h3>
-                            <p className='text-red-500 mb-2'>Price: ${item.price}</p>
-                            <p>Size: {item.size}</p>
+                            <h3 className="mb-2 text-base md:w-36">{item.productName}</h3>
+                            <p className='mb-2 text-sm text-blue-500'>Price: ${item.price}</p>
                         </div>
-                        <div className="flex flex-row mt-5 items-baseline justify-evenly">
+                        </div>
+                        <div className="flex flex-row items-baseline mt-5 justify-evenly">
                             <div className="flex items-center gap-2 me-10 ms-10">
                                 <button
-                                    onClick={() =>
-                                        setCartItems((prevItems) =>
-                                            prevItems.map((prevItem) =>
-                                                prevItem._id === item._id ? { ...prevItem, quantity: prevItem.quantity !== 1 ? prevItem.quantity - 1 : prevItem.quantity } : prevItem
-                                            )
-                                        )
-                                    }
-                                    className="px-2 py-1 text-xl font-bold bg-gray-100 rounded"
-                                >
+                                    onClick={()=>{decrementProduct(item._id)}}
+                                    className="px-2 py-1 text-base font-bold bg-gray-100 rounded">
                                     -
                                 </button>
-                                <span className='text-xl font-bold'>{item.quantity}</span>
+                                <span className='text-base font-bold'>{item.quantity}</span>
                                 <button
                                     onClick={() => incrementProduct(item._id)
-
                                     }
-                                    className="px-2 py-1 text-xl font-bold bg-gray-100 rounded"
+                                    className="px-2 py-1 text-base font-bold bg-gray-100 rounded"
                                 >
                                     +
                                 </button>
                             </div>
-                            <p className='md:ms-20 lg:ms-20 lg:me-20 md:me-20 text-xl font-bold'> ${item.price * item.quantity}</p>
+                            <p className='font-bold text-basm md:ms-20 lg:ms-20 lg:me-20 md:me-20'> ${item.price * item.quantity}</p>
                             <button
                                 onClick={() => handleDelete(item._id)}
-                                className="mt-2 px-2 py-1 ms-20 bg-red-500 text-white rounded"
+                                className="px-2 py-1 mt-2 text-white bg-red-500 rounded ms-20"
                             >
                                 <MdDelete></MdDelete>
                             </button>
@@ -120,31 +126,32 @@ const ShoppingCart = () => {
                 ))}
             </div>
 
-            <div className='right-side bg-gray-100 '>
-                <h2 className="text-2xl font-semibold mb-4 ps-5 py-5">Order Summary</h2>
+            <div className='w-full bg-gray-100 right-side md:w-3/12'>
+                <h2 className="py-5 mb-4 text-2xl font-semibold ps-5">Order Summary</h2>
                 <div className="p-4 rounded">
                     <div className='flex justify-between mt-2 mb-2'>
-                        <p className=' text-xl'>Subtotal</p>
-                        <p className=' text-xl'>${calculateTotalPrice()}</p>
+                        <p className='text-sm '>Subtotal</p>
+                        <p className='text-xl '>${calculateTotalPrice()}</p>
                     </div>
                     <div className='flex justify-between'>
-                        <p className=' text-xl'>Delivery</p>
-                        <p className=' text-xl'>Free</p>
+                        <p className='text-sm '>Delivery</p>
+                        <p className='text-sm '>Free</p>
                     </div>
                     <div className='flex justify-between mt-2 mb-2'>
-                        <p className=' text-xl'>Tax</p>
-                        <p className=' text-xl'>Free</p>
+                        <p className='text-sm '>Tax</p>
+                        <p className='text-sm '>Free</p>
                     </div>
                     <hr className='bg-gray-600' />
                     <div className='flex justify-between'>
-                        <p className=' text-xl font-bold'>Total</p>
-                        <p className=' text-xl font-bold'> ${calculateTotalPrice()}</p>
+                        <p className='text-sm font-bold '>Total</p>
+                        <p className='text-sm font-bold '> ${calculateTotalPrice()}</p>
                     </div>
 
-                    <button onClick={handleClick} className=" w-full mt-4 px-4 py-2 bg-red-800 text-white rounded">
+                    <button onClick={handleClick} className="w-full px-4 py-2 mt-4 text-white bg-blue-600 rounded ">
                         Checkout
                     </button>
                 </div>
+            </div>
             </div>
         </div>
     );

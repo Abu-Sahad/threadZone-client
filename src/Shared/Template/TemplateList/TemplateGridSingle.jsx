@@ -1,16 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faHeart, faNotEqual } from '@fortawesome/free-solid-svg-icons'
+import {  faEye, faCartShopping, faStreetView } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { faSellsy } from '@fortawesome/free-brands-svg-icons';
 
 const TemplateGridSingle = (params) => {
      const { userInfo } = useContext(AuthContext);
      const { _id, name, email } = userInfo
-     const { id, image, category, productName, price, discount, totalReview, rating, totalSell, shopId, shopName, quantity, size } = params.item;
+     const { id, image, category, productName, price, discount, totalReview, rating, totalSell, shopId, shopName, quantity, size, totalVisit } = params.item;
      const currentDate = new Date();
      const month = currentDate.getMonth() + 1;
      const day = currentDate.getDate();
@@ -32,7 +33,7 @@ const TemplateGridSingle = (params) => {
           date: formattedDate,
           category,
           price,
-          size
+          size,
      }
 
      const handleAddProduct = () => {
@@ -51,44 +52,43 @@ const TemplateGridSingle = (params) => {
                })
      }
      return (
-          <div className="group rounded bg-white shadow-xl overflow-hidden ">
+          <div className="bg-white rounded shadow-xl group">
                <div className="relative ">
-                    <img src={image} className="w-full h-80 shadow-md" />
-
-                    <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition ">
-                         <Link to={`productDetails/${id}`} className="text-white text-lg w-9 h-9 rounded-full bg-cDarkBlue hover:bg-gray-800 transition flex  items-center justify-center " >
-                              <FontAwesomeIcon icon={faNotEqual} />
-
+                    <img src={image[0]} className="w-full divide-x-2 h-60 " />
+                    <div className="absolute inset-0 flex items-center justify-center gap-2 transition bg-black opacity-0 bg-opacity-40 group-hover:opacity-100 ">
+                         <Link to={`productDetails/${params.item._id}`} className="flex items-center justify-center text-base text-white transition rounded-full w-9 h-9 bg-cDarkBlue hover:bg-gray-800 " >
+                              <FontAwesomeIcon icon={faEye} />
                          </Link>
-                         <a href="#" className="text-white text-lg w-9 h-9 rounded-full bg-cDarkBlue hover:bg-gray-800 transition flex items-center justify-center "  >
-                              <FontAwesomeIcon icon={faHeart} />
-                         </a>
+                         <Link href="#" className="flex items-center justify-center text-lg text-white transition rounded-full w-9 h-9 bg-cDarkBlue hover:bg-gray-800 " onClick={handleAddProduct}  >
+                              <FontAwesomeIcon icon={faCartShopping} />
+                         </Link>
                     </div>
                </div>
 
-               <div className="pt-4 pb-3 px-4 ">
+               <div className="px-4 pt-4 pb-8">
                     <Link to={`../product/productDetails/${params.item._id}`}>
-                         <h4 className="uppercase font-medium text-xl mb-2 h-18 text-gray-800 hover:text-primary transition ">{productName} </h4>
+                         <h4 className="text-lg font-medium text-gray-800 h-18 hover:text-primary">{productName} </h4>
                     </Link>
-
+                    <p className="text-sm text-gray-500">{category}</p>
                     <div className="flex items-baseline mb-1 space-x-2 " >
-                         <p className="text-xl text-primary font-roboto font-semibold "> {price} </p>
-                         <p className="text-sm text-gray-400 font-roboto  line-through "> {discount}%</p>
+                         <p className="text-base font-semibold text-blue-600 font-roboto "> ${price} </p>
+                         <p className="text-sm text-red-400 line-through font-roboto "> ${discount}</p>
                     </div>
-                    <div className="flex items-center ">
-                         <div className="flex gap-1 text-sm text-yellow-400 ">
-                              {Array.from({ length: rating }).map((item, index) => <FontAwesomeIcon key={index} icon={faStar} />)}
-
-                         </div>
-                         <div className="text-xs text-gray-500 ml-3 mt-1">Review : {totalReview}</div>
-                         <div className="text-xs text-gray-500 ml-3 mt-1">Sells : {totalSell}</div>
-
+                    <div className="flex flex-row justify-between mx-5"> 
+                     <div className="flex flex-row">
+                        <FontAwesomeIcon icon={faEye} className='mr-2 text-red-500'/> 
+                        <p className='text-sm font-light text-gray-500'> {totalVisit} </p>
+                     </div>
+                     <div className="flex flex-row">
+                        <FontAwesomeIcon icon={faStreetView} className='mr-2 text-green-500'/> 
+                        <p className='text-sm font-light text-gray-500'> {totalReview} </p>
+                     </div>
+                     <div className="flex flex-row">
+                        <FontAwesomeIcon icon={faSellsy} className='mr-2 text-blue-500'/> 
+                        <p className='text-sm font-light text-gray-500'> {totalSell} </p>
+                     </div>
                     </div>
                </div>
-
-               <button onClick={handleAddProduct} className="block w-full py-1 text-center text-white bg-cDarkBlue border border-cLightBlue rounded-b font-medium hover:bg-transparent hover:text-primary transition " >
-                    Add To Cart
-               </button>
           </div>
 
      );
